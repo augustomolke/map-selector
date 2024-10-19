@@ -19,11 +19,11 @@ import { ReloadIcon } from "@radix-ui/react-icons";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
-export const SelectionDrawer = () => {
+export const SelectionDrawer = ({ serverSession }) => {
   const { selected, setSelected, closeBtn } = useStore();
   const [loading, setLoading] = React.useState();
   const { toast } = useToast();
-  const { data: session, update } = useSession();
+  const session = useSession();
   const router = useRouter();
 
   const onSubmit = React.useCallback(async () => {
@@ -32,10 +32,10 @@ export const SelectionDrawer = () => {
     try {
       await updatePreferences(selected);
 
-      await update({
-        ...session,
+      await session.update({
+        ...serverSession,
         user: {
-          ...session.user,
+          ...serverSession.user,
           region: selected,
         },
       });
@@ -53,6 +53,7 @@ export const SelectionDrawer = () => {
 
       router.refresh();
     } catch (err) {
+      console.log(err);
       setLoading(false);
 
       toast({
@@ -61,7 +62,7 @@ export const SelectionDrawer = () => {
         description: "Algo deu errado.",
       });
     }
-  }, [selected]);
+  }, [selected, session]);
 
   return (
     <Drawer

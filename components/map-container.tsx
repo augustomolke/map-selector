@@ -2,7 +2,7 @@
 import { useMemo } from "react";
 import dynamic from "next/dynamic";
 import { LoadingSpinner } from "./loader";
-export default function MyPage({ prefRegion }) {
+export default function MyPage({ serverSession }) {
   const Map = useMemo(
     () =>
       dynamic(() => import("@/components/map"), {
@@ -16,7 +16,7 @@ export default function MyPage({ prefRegion }) {
     <Map
       position={[-23.568150503214053, -46.64908926499208]}
       zoom={12}
-      prefRegion={prefRegion}
+      serverSession={serverSession}
     />
   );
 }

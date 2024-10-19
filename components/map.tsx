@@ -36,7 +36,7 @@ const selectedStyle = {
 };
 
 export default function MyMap(props: any) {
-  const { position, zoom, prefRegion } = props;
+  const { position, zoom, serverSession } = props;
 
   const { selected, setSelected, setCloseBtn } = useStore();
 
@@ -60,7 +60,7 @@ export default function MyMap(props: any) {
           <Polygon
             key={state.properties.description}
             pathOptions={
-              prefRegion == state.properties.description
+              serverSession?.user.region == state.properties.description
                 ? selectedStyle
                 : defaultStyle
             }
@@ -75,7 +75,7 @@ export default function MyMap(props: any) {
               mouseout: (e) => {
                 if (
                   selected == null &&
-                  state.properties.description !== prefRegion
+                  state.properties.description !== serverSession?.user.region
                 ) {
                   const layer = e.target;
                   layer.setStyle(defaultStyle);

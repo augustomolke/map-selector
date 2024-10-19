@@ -11,8 +11,8 @@ export default async function Home() {
   return (
     <div className="h-screen fixed">
       <Header />
-      <SelectionDrawer />
-      <MapComponent prefRegion={session?.user?.region} />
+      <SelectionDrawer serverSession={session} />
+      <MapComponent serverSession={session} />
     </div>
   );
 }
