@@ -72,7 +72,7 @@ export const SelectionDrawer = ({ serverSession }) => {
         setSelected(null);
       }}
     >
-      <DrawerContent>
+      <DrawerContent className="max-w-screen-sm mx-auto">
         <DrawerHeader>
           <DrawerTitle>
             Gostaria de selecionar a região {selected} ?
