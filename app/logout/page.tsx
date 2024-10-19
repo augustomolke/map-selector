@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
-import Loading from "@/components/";
+import Loading from "@/components/loader";
+import dynamic from "next/dynamic";
 
 // Note: Logout works with a direct link to NextAuth's unbranded /api/auth/signout
 // however signOut does not appear to work consistently (e.g. doesn't clear session) and may cause redirect loops
@@ -14,7 +15,6 @@ async function fetchCsrfToken() {
 
 async function manualSignOut(callback) {
   const csrfToken = await fetchCsrfToken();
-  console.log("aaaAAAAA");
 
   const formData = new URLSearchParams();
   formData.append("csrfToken", csrfToken);
@@ -39,20 +39,26 @@ async function manualSignOut(callback) {
   }
 }
 
-export default function Logout() {
+function Logout() {
   // Note: If you are using useEffect, do not use this along with useSession.  This causes a race condition
   // and issues with underlying calls to the session endpoint to interfere with logging out if you have
   // multiple tabs open - See: https://github.com/nextauthjs/next-auth/issues/4612
 
   // Original example:
 
-  useEffect(() => {
-    manualSignOut();
-  }, []);
+  // useEffect(() => {
+  //   manualSignOut();
+  // }, []);
+
+  manualSignOut();
 
   return (
     <main className="flex flex-col items-center justify-center  h-screen w-screen p-12">
-      <Loading />
+      {/* <Loading /> */}
     </main>
   );
 }
+
+export default dynamic(() => Promise.resolve(Logout), {
+  ssr: false,
+});

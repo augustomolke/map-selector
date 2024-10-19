@@ -39,6 +39,7 @@ export function SignIn() {
               await loginAction(formData);
             } catch (e) {
               setLoading(false);
+              console.log(e);
               toast({
                 icon: <CircleX height={48} width={48} />,
                 title: "Algo deu errado!",
