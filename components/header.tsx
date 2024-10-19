@@ -10,9 +10,9 @@ export const Header = () => {
           <Logo />
           <div>
             {/* <CommandMenu /> */}
-            <Link className="logout" href="/logout">
+            <a className="logout" href="/logout">
               <LogOut stroke="hsl(var(--primary))" />
-            </Link>
+            </a>
           </div>
         </div>
       </div>

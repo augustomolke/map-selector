@@ -52,6 +52,8 @@ export default function Logout() {
   manualSignOut();
 
   return (
-    <main className="flex flex-col items-center justify-center  h-screen w-screen p-12"></main>
+    <main className="flex flex-col items-center justify-center  h-screen w-screen p-12">
+      aaa
+    </main>
   );
 }
