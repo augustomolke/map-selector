@@ -12,8 +12,9 @@ async function fetchCsrfToken() {
   return data.csrfToken;
 }
 
-async function manualSignOut() {
+async function manualSignOut(callback) {
   const csrfToken = await fetchCsrfToken();
+  console.log("aaaAAAAA");
 
   const formData = new URLSearchParams();
   formData.append("csrfToken", csrfToken);
@@ -45,15 +46,13 @@ export default function Logout() {
 
   // Original example:
 
-  //useEffect(() => {
-  //    manualSignOut();
-  //}, []);
-
-  manualSignOut();
+  useEffect(() => {
+    manualSignOut();
+  }, []);
 
   return (
     <main className="flex flex-col items-center justify-center  h-screen w-screen p-12">
-      aaa
+      <Loading />
     </main>
   );
 }

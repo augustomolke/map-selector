@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Logo } from "./logo";
-import { LogOut } from "lucide-react";
+import { LogoutButton } from "./logout-button";
 
 export const Header = () => {
   return (
@@ -10,9 +10,7 @@ export const Header = () => {
           <Logo />
           <div>
             {/* <CommandMenu /> */}
-            <a className="logout" href="/logout">
-              <LogOut stroke="hsl(var(--primary))" />
-            </a>
+            <LogoutButton />
           </div>
         </div>
       </div>
