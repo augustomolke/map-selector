@@ -78,7 +78,7 @@ export const SelectionDrawer = ({ serverSession }) => {
             Gostaria de selecionar a região {selected} ?
           </DrawerTitle>
           <DrawerDescription>
-            Você selecionou a região {selected} para realizar suas entregar ou
+            Você selecionou a região {selected} para realizar suas entregas ou
             coletas. Gostaria de confirmar?
           </DrawerDescription>
         </DrawerHeader>
