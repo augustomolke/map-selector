@@ -26,6 +26,15 @@ const defaultStyle = {
   color: "white",
 };
 
+const closedStyle = {
+  fillColor: "gray",
+  fillOpacity: 0.8,
+  weight: 2,
+  opacity: 1,
+  dashArray: 3,
+  color: "white",
+};
+
 const selectedStyle = {
   dashArray: "",
   fillColor: "#FD8D3C",
@@ -36,7 +45,7 @@ const selectedStyle = {
 };
 
 export default function MyMap(props: any) {
-  const { position, zoom, serverSession } = props;
+  const { position, zoom, serverSession, closed } = props;
 
   const { selected, setSelected, setCloseBtn } = useStore();
 
@@ -56,23 +65,30 @@ export default function MyMap(props: any) {
           item[0],
         ]);
 
+        const isClosed = closed.includes(state.properties.description);
+
         return (
           <Polygon
             key={state.properties.description}
             pathOptions={
-              serverSession?.user.region == state.properties.description
+              isClosed
+                ? closedStyle
+                : serverSession?.user.region == state.properties.description
                 ? selectedStyle
                 : defaultStyle
             }
             positions={coordinates}
             eventHandlers={{
               mouseover: (e) => {
+                if (isClosed) return;
+
                 if (selected == null) {
                   const layer = e.target;
                   layer.setStyle(selectedStyle);
                 }
               },
               mouseout: (e) => {
+                if (isClosed) return;
                 if (
                   selected == null &&
                   state.properties.description !== serverSession?.user.region
@@ -84,8 +100,10 @@ export default function MyMap(props: any) {
               click: (e) => {
                 const layer = e.target;
                 layer.setStyle(selectedStyle);
-                setSelected(state.properties.description);
-                setCloseBtn(() => layer.setStyle(defaultStyle));
+                setSelected(isClosed ? "closed" : state.properties.description);
+                setCloseBtn(() =>
+                  layer.setStyle(isClosed ? closedStyle : defaultStyle)
+                );
               },
             }}
           />

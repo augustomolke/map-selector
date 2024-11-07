@@ -22,3 +22,20 @@ export const updatePreferences = async (region) => {
 
   const pref = await result.json();
 };
+
+export const getRegions = async () => {
+  const session = await auth();
+
+  const body = JSON.stringify({
+    method: "GET",
+    sheet: "regions",
+    key: process.env.SECRET,
+  });
+
+  const result = await fetch(api_url, {
+    method: "POST",
+    body,
+  });
+
+  return await result.json();
+};

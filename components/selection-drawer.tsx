@@ -72,26 +72,37 @@ export const SelectionDrawer = ({ serverSession }) => {
         setSelected(null);
       }}
     >
-      <DrawerContent className="max-w-screen-sm mx-auto">
-        <DrawerHeader>
-          <DrawerTitle>
-            Gostaria de selecionar a região {selected} ?
-          </DrawerTitle>
-          <DrawerDescription>
-            Você selecionou a região {selected} para realizar suas entregas ou
-            coletas. Gostaria de confirmar?
-          </DrawerDescription>
-        </DrawerHeader>
-        <DrawerFooter>
-          <Button onClick={onSubmit}>
-            {loading ? (
-              <ReloadIcon className="mx-12 h-4 w-4 animate-spin" />
-            ) : (
-              "Confirmar"
-            )}
-          </Button>
-        </DrawerFooter>
-      </DrawerContent>
+      {selected != "closed" ? (
+        <DrawerContent className="max-w-screen-sm mx-auto">
+          <DrawerHeader>
+            <DrawerTitle>
+              Gostaria de selecionar a região {selected} ?
+            </DrawerTitle>
+            <DrawerDescription>
+              Você selecionou a região {selected} para realizar suas entregas ou
+              coletas. Gostaria de confirmar?
+            </DrawerDescription>
+          </DrawerHeader>
+          <DrawerFooter>
+            <Button onClick={onSubmit}>
+              {loading ? (
+                <ReloadIcon className="mx-12 h-4 w-4 animate-spin" />
+              ) : (
+                "Confirmar"
+              )}
+            </Button>
+          </DrawerFooter>
+        </DrawerContent>
+      ) : (
+        <DrawerContent className="max-w-screen-sm mx-auto">
+          <DrawerHeader>
+            <DrawerTitle>Esta região não tem mais vagas!</DrawerTitle>
+            <DrawerDescription>
+              Por favor, escolha outra região de preferência.
+            </DrawerDescription>
+          </DrawerHeader>
+        </DrawerContent>
+      )}
     </Drawer>
   );
 };
