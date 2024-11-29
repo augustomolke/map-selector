@@ -80,7 +80,11 @@ export const SelectionDrawer = ({ serverSession }) => {
             </DrawerTitle>
             <DrawerDescription>
               Você selecionou a região {selected} para realizar suas entregas ou
-              coletas. Gostaria de confirmar?
+              coletas.{" "}
+              <strong>
+                Esta região é composta por toda a área destacada no mapa
+              </strong>
+              . Gostaria de confirmar?
             </DrawerDescription>
           </DrawerHeader>
           <DrawerFooter>

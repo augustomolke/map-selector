@@ -5,7 +5,7 @@ import { LoadingSpinner } from "./loader";
 export default function MyPage({ serverSession, closed }) {
   const Map = useMemo(
     () =>
-      dynamic(() => import("@/components/map"), {
+      dynamic(() => import("@/components/grouped-map"), {
         loading: () => <LoadingSpinner />,
         ssr: false,
       }),
