@@ -94,6 +94,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           throw new AuthError("Telefone Incorreto");
         }
 
+        console.log("LOGIN SUCCESS", user);
+
         // return user object with their profile data
         return user.data;
       },
