@@ -12,6 +12,15 @@ const nextConfig = {
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
+  experimental: {
+    serverActions: {
+      allowedOrigins: [
+        "proxy.proxy-production.svc.cluster.local:80", // localhost
+        "spx-own-flex.netlify.app", // Codespaces
+        "localhost:3000",
+      ],
+    },
+  },
 };
 
 export default nextConfig;
