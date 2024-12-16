@@ -11,7 +11,7 @@ export const LoadingSpinner = ({
   ...props
 }: ISVGProps) => {
   return (
-    <div className="h-screen w-screen flex justify-center items-center">
+    <div className="w-screen h-96 flex justify-center items-center">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width={size}

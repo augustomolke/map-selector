@@ -4,9 +4,10 @@ import { signOut } from "@/auth";
 import { Button } from "./ui/button";
 import logoutAction from "@/actions/logout-action";
 
-export const LogoutButton = () => {
+export const LogoutButton = ({ customClass }) => {
   return (
     <Button
+      className={customClass}
       variant={"outliner"}
       size="icon"
       onClick={async () => {

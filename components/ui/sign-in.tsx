@@ -48,7 +48,12 @@ export function SignIn() {
             }
           }}
         >
-          <input className="" type="hidden" name="redirectTo" value="/" />
+          <input
+            className=""
+            type="hidden"
+            name="redirectTo"
+            value="/preferencias"
+          />
           <Label>
             Driver ID
             <Input

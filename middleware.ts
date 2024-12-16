@@ -1,7 +1,9 @@
 import { auth } from "@/auth";
 
+const allowed = ["/login", "/"];
+
 export default auth((req) => {
-  if (!req.auth && req.nextUrl.pathname !== "/login") {
+  if (!req.auth && !allowed.includes(req.nextUrl.pathname)) {
     const newUrl = new URL("/login", req.nextUrl.origin);
     return Response.redirect(newUrl);
   }

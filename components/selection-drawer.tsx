@@ -48,10 +48,10 @@ export const SelectionDrawer = ({ serverSession }) => {
           <CircleCheckBig color="hsl(var(--green))" height={48} width={48} />
         ),
         title: "Pronto!",
-        description: "Suas sua preferência foi salva!",
+        description: "Sua preferência foi salva!",
       });
 
-      router.refresh();
+      router.push("/parabens");
     } catch (err) {
       console.log(err);
       setLoading(false);

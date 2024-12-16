@@ -3,7 +3,7 @@ import { SignIn } from "@/components/ui/sign-in";
 
 export default function Home() {
   return (
-    <main className="flex flex-col items-center justify-center  h-screen w-screen p-12">
+    <main className="flex flex-col items-center justify-center p-12">
       <SignIn />
     </main>
   );
