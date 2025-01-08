@@ -4,7 +4,7 @@ import { auth } from "@/auth";
 const api_url = process.env.GSHEET_API_URL;
 const secret = process.env.SECRET;
 
-export const updatePreferences = async (region) => {
+export const updatePreferences = async (payload) => {
   const session = await auth();
 
   const body = JSON.stringify({
@@ -12,7 +12,7 @@ export const updatePreferences = async (region) => {
     sheet: "drivers",
     key: process.env.SECRET,
     id: session?.user._id,
-    payload: { region },
+    payload,
   });
 
   const result = await fetch(api_url, {
@@ -21,6 +21,25 @@ export const updatePreferences = async (region) => {
   });
 
   const pref = await result.json();
+};
+
+export const getCeps = async () => {
+  const session = await auth();
+
+  const body = JSON.stringify({
+    method: "GET",
+    sheet: "ceps",
+    key: process.env.SECRET,
+  });
+
+  const result = await fetch(api_url, {
+    method: "POST",
+    body,
+  });
+
+  const ceps = await result.json();
+
+  return ceps.data || [];
 };
 
 const defaultPrefs = {
