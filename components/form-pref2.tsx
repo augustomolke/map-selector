@@ -48,11 +48,11 @@ export function FormPref({ defaultValues, macroRegions }) {
 
   const ceps = useMemo(() => {
     if (!selectedMacro) return [];
-    const [route, zona, cluster] = selectedMacro.split("_");
+    const [route, zona] = selectedMacro.split("_");
 
     const ceps = macroRegions[route]
-      .filter((r) => r.zona == zona && r.cluster == cluster)
-      .map((z) => ({ label: z.ceps, value: z.ceps, cluster }));
+      .filter((r) => r.zona == zona)
+      .map((z) => ({ label: z.ceps, value: `${z.ceps}_${z.cluster}` }));
 
     return ceps;
   }, [selectedMacro]);
@@ -61,9 +61,12 @@ export function FormPref({ defaultValues, macroRegions }) {
     setLoading(true);
 
     try {
-      const [route, zona, cluster] = data.macro.split("_");
+      const [route, zona] = data.macro.split("_");
+
+      const ceps = data.ceps.map((c) => c.split("_")[0]).join(",");
+      const cluster = data.ceps[0].split("_")[1];
       await updatePreferences({
-        ceps: data.ceps.join(","),
+        ceps,
         region: cluster,
         route,
       });
@@ -139,11 +142,8 @@ export function FormPref({ defaultValues, macroRegions }) {
                                   const zonas = [
                                     ...new Set(
                                       macroRegions[region]
-                                        .map((r) => ({
-                                          zona: r.zona,
-                                          cluster: r.cluster,
-                                        }))
-                                        .filter(({ zona }) => !!zona)
+                                        .map((r) => r.zona)
+                                        .filter((zona) => !!zona)
                                     ),
                                   ];
 
@@ -153,13 +153,13 @@ export function FormPref({ defaultValues, macroRegions }) {
                                         <Badge>{region}</Badge>
                                       </SelectLabel>
 
-                                      {zonas.map(({ zona, cluster }) => {
+                                      {zonas.map((zona) => {
                                         return (
                                           <SelectItem
-                                            value={`${region}_${zona}_${cluster}`}
+                                            value={`${region}_${zona}`}
                                             className="flex justify-between items-center"
                                           >
-                                            {`(${cluster}) ${zona}`}
+                                            {`${zona}`}
                                           </SelectItem>
                                         );
                                       })}
@@ -201,8 +201,6 @@ export function FormPref({ defaultValues, macroRegions }) {
                     control={form.control}
                     name="ceps"
                     render={({ field }) => {
-                      const [a, b, cluster] = selectedMacro.split("_");
-
                       return (
                         <FormItem
                           key={"ceps"}
