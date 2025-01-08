@@ -57,6 +57,15 @@ export function FormPref({ defaultValues, macroRegions }) {
     return ceps;
   }, [selectedMacro]);
 
+  const limit = useMemo(() => {
+    if (!selectedMacro) return 0;
+    const [route, zona] = selectedMacro.split("_");
+
+    const ceps = macroRegions[route].filter((r) => r.zona == zona);
+
+    return ceps.length < 3 ? ceps.length : 3;
+  }, [selectedMacro]);
+
   async function onSubmit(data) {
     setLoading(true);
 
@@ -232,7 +241,7 @@ export function FormPref({ defaultValues, macroRegions }) {
         ) : null}
         <Button
           type="submit"
-          disabled={loading || !selectedCeps || selectedCeps.length < 1}
+          disabled={loading || !selectedCeps || selectedCeps.length < limit}
         >
           {loading ? (
             <ReloadIcon className="mx-4 h-4 w-4 animate-spin" />
