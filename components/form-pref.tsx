@@ -52,7 +52,7 @@ const items = [
 const shifts = [
   {
     id: "janela1",
-    label: "Janela 1: 9AM",
+    label: "Janela 1: 6AM",
   },
   {
     id: "janela2",
@@ -60,7 +60,7 @@ const shifts = [
   },
   {
     id: "janela3",
-    label: "Janela 3: 15PM",
+    label: "Janela 3: 14PM",
   },
 ] as const;
 

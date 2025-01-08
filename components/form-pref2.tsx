@@ -230,7 +230,10 @@ export function FormPref({ defaultValues, macroRegions }) {
             )}
           />
         ) : null}
-        <Button type="submit" disabled={loading}>
+        <Button
+          type="submit"
+          disabled={loading || !selectedCeps || selectedCeps.length < 1}
+        >
           {loading ? (
             <ReloadIcon className="mx-4 h-4 w-4 animate-spin" />
           ) : (
