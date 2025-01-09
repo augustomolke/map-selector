@@ -72,8 +72,10 @@ export function FormPref({ defaultValues, macroRegions }) {
     try {
       const [route, zona] = data.macro.split("_");
 
+      console.log(data);
+
       const ceps = data.ceps.map((c) => c.split("_")[0]).join(",");
-      const cluster = data.ceps[0].split("_")[1];
+      const cluster = data.ceps.map((cep) => cep.split("_")[1]).join(", ");
       await updatePreferences({
         ceps,
         region: cluster,
